@@ -2,7 +2,7 @@
 set -euo pipefail
 if [ "x${SDEBUG-}" = "x1" ];then set -x;fi
 . /bin/cicdtools.sh
-docker-auth.sh
+docker-credential-copsgitlab init
 cd /
 # registry cache settings
 # allow to use either a custom top directory or custom separate directories for cacert, certs, & cache directories

@@ -3,7 +3,7 @@ set -euo pipefail
 if [ "x${SDEBUG-}" = "x1" ];then set -x;fi
 . /bin/cicdtools.sh
 # let gitlab not wait for service launch and mimic a service running on exposed ports
-docker-auth.sh
+docker-credential-copsgitlab init
 # block for inside gitlab-ci cookiecutters projects use; wait for the registry cache to be fully setup
 if [ "x${COMMON_HOSTS_FILE-}" != "x" ];then
     # let gitlab not wait for service launch and mimic a service running on exposed ports
