@@ -1,0 +1,10 @@
+/files/
+/.env
+/hostkeys/*
+/local
+docker-compose.local.yml
+/keys
+acls.sh
+docker.env
+docker-compose.override.yml
+
