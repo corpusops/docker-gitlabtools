@@ -13,5 +13,11 @@ if [ "x${COMMON_HOSTS_FILE-}" != "x" ];then
     add_registriescache_cacrt
     stop_dummy_servers
 fi
+ALLOWED_SHELLS="${ALLOWED_SHELLS:-"bash|zsh|ash|busybox|sh"}"
+for i in ${1-} ${2-};do
+    if ( echo "$i" | egrep -q "/bin/(${ALLOWED_SHELLS})$|^(${ALLOWED_SHELLS})$" );then
+        "$@";exit $?
+    fi
+done
 exec dockerd-entrypoint.sh --experimental "$@"
 # vim:set et sts=4 ts=4 tw=0:
