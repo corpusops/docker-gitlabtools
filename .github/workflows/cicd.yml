@@ -53,10 +53,14 @@ jobs:
         - IMG_RELEASE: latest
           IMG: "corpusops/dockerandcompose"
           DFILE: "Dockerfile.compose"
-          DPATH: "."
+          DPATH: "." 
         - IMG_RELEASE: dind
           IMG: "corpusops/dockerandcompose"
           DFILE: "Dockerfile.dind"
+          DPATH: "."
+        - IMG_RELEASE: registry2
+          IMG: "corpusops/dockerandcompose"
+          DFILE: "Dockerfile.registry"
           DPATH: "."
 on:
   push:

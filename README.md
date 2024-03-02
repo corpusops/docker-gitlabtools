@@ -5,6 +5,7 @@
     - `corpusops/dockerandcompose:{compose,latest}`: `docker/compose` & `docker:dind` images => run compose entrypoint
     - `corpusops/dockerandcompose:docker`: `docker/compose` & `docker:latest` images => run docker entrypoint
     - `corpusops/dockerandcompose:dind`: `docker/compose` & `docker:dind` images => run dind entrypoint
+    - `corpusops/dockerandcompose:registry2`: `docker/compose` & `docker:dind` & `registry:2`  images => run registry2 entrypoint
     - We include also [yq](https://github.com/mikefarah/yq) & [jq](https://github.com/stedolan/jq)
 
 

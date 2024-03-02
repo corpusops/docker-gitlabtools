@@ -1,16 +1,22 @@
 ARG COMPOSE_VERSION=1.29.2
+ARG REGISTRY_VERSION=2
 ARG DIND_VERSION=
 ARG YQ_VERSION=4
 FROM mikefarah/yq:$YQ_VERSION AS yq
 FROM docker:dind$DOCKER_VERSION AS base
 FROM docker/compose:$COMPOSE_VERSION AS compose
+FROM registry:$REGISTRY_VERSION as registry
 ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 RUN --mount=type=bind,from=base,target=/s \
+    cp -rfv /s/usr/libexec/docker /usr/libexec;\
+    cp -rvf /s/usr/local/bin/* /usr/local/bin
+RUN --mount=type=bind,from=base,target=/s \
+    cp -rfv /s/usr/libexec/docker /usr/libexec;\
+    cp -rvf /s/usr/local/bin/* /usr/local/bin
+RUN --mount=type=bind,from=compose,target=/s \
     set -ex;\
     apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
     for i in /var/lib/docker /usr/local/sbin;do mkdir $i||true;done;\
-    mv -vf /usr/local/bin/docker-compose /usr/local/sbin;\
-    cp -rfv /s/usr/libexec/docker /usr/libexec;\
-    cp -rvf /s/usr/local/bin/* /usr/local/bin
+    cp -vf /s/usr/local/bin/docker-compose /usr/local/bin

@@ -1,16 +1,14 @@
 ARG COMPOSE_VERSION=1.29.2
 ARG DIND_VERSION=
 ARG YQ_VERSION=4
-ARG ADDED_PACKAGES=bash openssl ca-certificates jq
 FROM mikefarah/yq:$YQ_VERSION AS yq
 FROM docker/compose:$COMPOSE_VERSION AS compose
 FROM docker:dind$DOCKER_VERSION AS base
-WORKDIR $CODE_ROOT/src
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 RUN --mount=type=bind,from=compose,target=/s \
+    set -ex;\
     apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
     if [ -h $DC ];then rm $DC;fi;\
     cp -vf /s/$DC $DC
-# image will drop privileges itself using gosu at the end of the entrypoint
-
