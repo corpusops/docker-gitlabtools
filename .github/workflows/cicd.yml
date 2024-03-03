@@ -57,6 +57,10 @@ jobs:
         - IMG_RELEASE: dind
           IMG: "corpusops/dockerandcompose"
           DFILE: "Dockerfile.dind"
+          DPATH: "." 
+        - IMG_RELEASE: registryproxy
+          IMG: "corpusops/dockerandcompose"
+          DFILE: "Dockerfile.registryproxy"
           DPATH: "."
         - IMG_RELEASE: registry2
           IMG: "corpusops/dockerandcompose"
