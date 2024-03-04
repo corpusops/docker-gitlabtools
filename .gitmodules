@@ -1,0 +1,3 @@
+[submodule "docker-registry-proxy"]
+	path = docker-registry-proxy
+	url = https://github.com/rpardini/docker-registry-proxy.git

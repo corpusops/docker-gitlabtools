@@ -33,15 +33,20 @@ jobs:
         run: set -ex;
              IMGV=${IMG_RELEASE};
              t=${IMG}:${IMGV};
+             ./refresh.sh;
              db() { docker build --build-arg BUILDKIT_INLINE_CACHE="1" -t ${3} -f ${1} ${2} "${@:4}"; };
              db ${DFILE} ${DPATH} ${t}-no-squash;docker tag ${t}-no-squash ${t};
              if [ "x${NO_SQUASH}" = "x" ];then db ${DFILE} ${DPATH} ${t} --squash;fi;
              if [ "x${{steps.v.outputs.releasable}}" = "xtrue" ];then for i in "" -no-squash;do docker push ${t}${i};done;fi;
     strategy:
-      max-parallel: 5
+      max-parallel: 6
       fail-fast: false
       matrix:
         include:
+        - IMG_RELEASE: registryproxy
+          IMG: "corpusops/dockerandcompose"
+          DFILE: "Dockerfile.registryproxy"
+          DPATH: "."
         - IMG_RELEASE: docker
           IMG: "corpusops/dockerandcompose"
           DFILE: "Dockerfile.docker"
@@ -53,14 +58,10 @@ jobs:
         - IMG_RELEASE: latest
           IMG: "corpusops/dockerandcompose"
           DFILE: "Dockerfile.compose"
-          DPATH: "." 
+          DPATH: "."
         - IMG_RELEASE: dind
           IMG: "corpusops/dockerandcompose"
           DFILE: "Dockerfile.dind"
-          DPATH: "." 
-        - IMG_RELEASE: registryproxy
-          IMG: "corpusops/dockerandcompose"
-          DFILE: "Dockerfile.registryproxy"
           DPATH: "."
         - IMG_RELEASE: registry2
           IMG: "corpusops/dockerandcompose"

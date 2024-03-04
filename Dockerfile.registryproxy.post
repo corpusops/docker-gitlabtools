@@ -1,0 +1,14 @@
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
+ENV DC=/usr/local/bin/docker-compose
+RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
+RUN --mount=type=bind,from=base,target=/s \
+    cp -rfv /s/usr/libexec/docker /usr/libexec;\
+    cp -rvf /s/usr/local/bin/* /usr/local/bin
+RUN --mount=type=bind,from=base,target=/s \
+    cp -rfv /s/usr/libexec/docker /usr/libexec;\
+    cp -rvf /s/usr/local/bin/* /usr/local/bin
+RUN --mount=type=bind,from=compose,target=/s \
+    set -ex;\
+    apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
+    for i in /var/lib/docker /usr/local/sbin;do mkdir $i||true;done;\
+    cp -vf /s/usr/local/bin/docker-compose /usr/local/bin
