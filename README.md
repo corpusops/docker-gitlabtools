@@ -1,12 +1,12 @@
-# dockerandcompose docker images
-- build: ![docker.dockerandcompose](https://github.com/corpusops/docker.dockerandcompose/workflows/.github/workflows/cicd.yml/badge.svg?branch=master)
+# gitlabtools docker images
+- build: ![docker.gitlabtools](https://github.com/corpusops/docker.gitlabtools/workflows/.github/workflows/cicd.yml/badge.svg?branch=master)
 
 - Minimal Docker image combinating :
-    - `corpusops/dockerandcompose:{compose,latest}`: `docker/compose` & `docker:dind` images => run `compose` entrypoint
-    - `corpusops/dockerandcompose:docker`: `docker/compose` & `docker:latest` images => run `docker` entrypoint
-    - `corpusops/dockerandcompose:dind`: `docker/compose` & `docker:dind` images => run `dind` entrypoint
-    - `corpusops/dockerandcompose:registry2`: `docker/compose` & `docker:dind` & `registry:2`  images => run `registry2` entrypoint
-    - `corpusops/dockerandcompose:registrycache`: `docker/compose` & `docker:dind` & `rpardini/docker-registry-proxy`  images => run `rpardini/docker-registry-proxy` entrypoint
+    - `corpusops/gitlabtools:{compose,latest}`: `docker/compose` & `docker:dind` images => run `compose` entrypoint
+    - `corpusops/gitlabtools:docker`: `docker/compose` & `docker:latest` images => run `docker` entrypoint
+    - `corpusops/gitlabtools:dind`: `docker/compose` & `docker:dind` images => run `dind` entrypoint
+    - `corpusops/gitlabtools:registry2`: `docker/compose` & `docker:dind` & `registry:2`  images => run `registry2` entrypoint
+    - `corpusops/gitlabtools:registrycache`: `docker/compose` & `docker:dind` & `rpardini/docker-registry-proxy`  images => run `rpardini/docker-registry-proxy` entrypoint
         - we merged https://github.com/rpardini/docker-registry-proxy/pull/78
         - we removed the VOLUME instructions as we must run through gitlab and can't control volume initializations
     - We include also [yq](https://github.com/mikefarah/yq) & [jq](https://github.com/stedolan/jq)

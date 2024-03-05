@@ -44,27 +44,27 @@ jobs:
       matrix:
         include:
         - IMG_RELEASE: registryproxy
-          IMG: "corpusops/dockerandcompose"
+          IMG: "corpusops/gitlabtools"
           DFILE: "Dockerfile.registryproxy"
           DPATH: "."
         - IMG_RELEASE: docker
-          IMG: "corpusops/dockerandcompose"
+          IMG: "corpusops/gitlabtools"
           DFILE: "Dockerfile.docker"
           DPATH: "."
         - IMG_RELEASE: compose
-          IMG: "corpusops/dockerandcompose"
+          IMG: "corpusops/gitlabtools"
           DFILE: "Dockerfile.compose"
           DPATH: "."
         - IMG_RELEASE: latest
-          IMG: "corpusops/dockerandcompose"
+          IMG: "corpusops/gitlabtools"
           DFILE: "Dockerfile.compose"
           DPATH: "."
         - IMG_RELEASE: dind
-          IMG: "corpusops/dockerandcompose"
+          IMG: "corpusops/gitlabtools"
           DFILE: "Dockerfile.dind"
           DPATH: "."
         - IMG_RELEASE: registry2
-          IMG: "corpusops/dockerandcompose"
+          IMG: "corpusops/gitlabtools"
           DFILE: "Dockerfile.registry"
           DPATH: "."
 on:
