@@ -1,5 +1,5 @@
 # gitlabtools docker images
-- build: ![docker.gitlabtools](https://github.com/corpusops/docker.gitlabtools/workflows/.github/workflows/cicd.yml/badge.svg?branch=master)
+- build: ![docker.gitlabtools](https://github.com/corpusops/docker.gitlabtools/workflows/.github/workflows/cicd.yml/badge.svg?branch=main)
 
 - Minimal Docker image combinating :
     - `corpusops/gitlabtools:{compose,latest}`: `docker/compose` & `docker:dind` images => run `compose` entrypoint
