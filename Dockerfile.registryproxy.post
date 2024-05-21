@@ -12,3 +12,5 @@ RUN --mount=type=bind,from=compose,target=/s \
     apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
     for i in /var/lib/docker /usr/local/sbin;do mkdir $i||true;done;\
     cp -vf /s/usr/local/bin/docker-compose /usr/local/bin
+ADD rootfs/common/ rootfs/registryproxy/ /
+ENTRYPOINT ["dockerentry.sh"]

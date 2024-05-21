@@ -12,3 +12,5 @@ RUN --mount=type=bind,from=compose,target=/s \
     apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
     if [ -h $DC ];then rm $DC;fi;\
     cp -vf /s/$DC $DC
+ADD rootfs/common/ rootfs/docker/ /
+ENTRYPOINT ["dockerentry.sh"]

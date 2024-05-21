@@ -3,12 +3,14 @@ set -ex
 cd $(dirname $(readlink -f "$0"))
 W=$(pwd)
 t=$W/Dockerfile.registryproxy
-git submodule init
-git submodule update
+if [ ! -e docker-registry-proxy/Dockerfile ];then
+    git submodule init
+    git submodule update
+fi
 cd docker-registry-proxy
+git remote add upstream https://github.com/rpardini/docker-registry-proxy.git || true
 git remote add corpusops https://github.com/corpusops/docker-registry-proxy.git || true
 git fetch --all
-git pull origin master
 git reset --hard corpusops/ownauth
 egrep "^ARG BASE"  Dockerfile > "$t"
 cat ../Dockerfile.registryproxy.pre >> "$t"

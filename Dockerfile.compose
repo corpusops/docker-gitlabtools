@@ -14,3 +14,5 @@ RUN --mount=type=bind,from=base,target=/s \
     mv -vf /usr/local/bin/docker-compose /usr/local/sbin;\
     cp -rfv /s/usr/libexec/docker /usr/libexec;\
     cp -rvf /s/usr/local/bin/* /usr/local/bin
+ADD rootfs/common/ rootfs/compose/ /
+ENTRYPOINT ["dockerentry.sh"]
