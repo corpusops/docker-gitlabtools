@@ -4,13 +4,15 @@ ARG YQ_VERSION=4
 FROM mikefarah/yq:$YQ_VERSION AS yq
 FROM docker/compose:$COMPOSE_VERSION AS compose
 FROM docker:$DOCKER_VERSION AS base
-ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq curl'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
+ADD add_buildx.sh /tmp
 RUN --mount=type=bind,from=compose,target=/s \
     set -ex;\
     apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
     if [ -h $DC ];then rm $DC;fi;\
+    /tmp/add_buildx.sh;\
     cp -vf /s/$DC $DC
 ADD rootfs/common/ rootfs/docker/ /
 ENTRYPOINT ["dockerentry.sh"]
