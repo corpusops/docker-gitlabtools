@@ -6,7 +6,7 @@ FROM mikefarah/yq:$YQ_VERSION AS yq
 FROM docker:dind$DOCKER_VERSION AS base
 FROM docker/compose:$COMPOSE_VERSION AS compose
 FROM registry:$REGISTRY_VERSION as registry
-ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq git'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 RUN --mount=type=bind,from=base,target=/s \

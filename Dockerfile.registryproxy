@@ -131,7 +131,7 @@ ENV PROXY_CONNECT_SEND_TIMEOUT="60s"
 
 # Did you want a shell? Sorry, the entrypoint never returns, because it runs nginx itself. Use 'docker exec' if you need to mess around internally.
 ENTRYPOINT ["/entrypoint.sh"]
-ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq git'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 RUN --mount=type=bind,from=base,target=/s \

@@ -4,7 +4,7 @@ ARG YQ_VERSION=4
 FROM mikefarah/yq:$YQ_VERSION AS yq
 FROM docker:dind$DOCKER_VERSION AS base
 FROM docker/compose:$COMPOSE_VERSION AS compose
-ARG ADDED_PACKAGES='bash openssl ca-certificates jq curl'
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq curl git'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 ADD add_buildx.sh /tmp/

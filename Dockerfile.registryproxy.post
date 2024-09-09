@@ -1,4 +1,4 @@
-ARG ADDED_PACKAGES='bash openssl ca-certificates jq'
+ARG ADDED_PACKAGES='bash openssl ca-certificates jq git'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 RUN --mount=type=bind,from=base,target=/s \
