@@ -1,9 +1,10 @@
 ARG COMPOSE_VERSION=1.29.2
-ARG DIND_VERSION=
+ARG DOCKER_VERSION=20.10
+ARG DIND_VERSION=$DOCKER_VERSION
 ARG YQ_VERSION=4
 FROM mikefarah/yq:$YQ_VERSION AS yq
 FROM docker/compose:$COMPOSE_VERSION AS compose
-FROM docker:dind$DOCKER_VERSION AS base
+FROM docker:$DOCKER_VERSION-dind AS base
 ARG ADDED_PACKAGES='bash openssl ca-certificates jq curl git'
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
