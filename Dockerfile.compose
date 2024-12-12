@@ -13,9 +13,9 @@ RUN --mount=type=bind,from=base,target=/s \
     set -ex;\
     apk add --update-cache $ADDED_PACKAGES && rm -rf /var/cache/apk/;\
     for i in /var/lib/docker /usr/local/sbin;do mkdir $i||true;done;\
-    /tmp/add_buildx.sh;\
     mv -vf /usr/local/bin/docker-compose /usr/local/sbin;\
-    cp -rfv /s/usr/libexec/docker /usr/libexec;\
+    /tmp/add_buildx.sh;\
+    for i in /usr/local/libexec/docker /s/usr/libexec/docker;do if [ -e /s/$i ];then if [ ! -e $i ];then mkdir -pv $i;fi;cp -rfv /s/$i/. $i;fi;done;\
     cp -rvf /s/usr/local/bin/* /usr/local/bin
 ADD rootfs/common/ rootfs/compose/ /
 ENTRYPOINT ["dockerentry.sh"]

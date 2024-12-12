@@ -1,11 +1,13 @@
 ARG ADDED_PACKAGES='bash openssl ca-certificates jq git'
+ADD add_buildx.sh /tmp/
 ENV DC=/usr/local/bin/docker-compose
 RUN --mount=type=bind,from=yq,target=/s cp /s/usr/bin/yq /usr/bin
 RUN --mount=type=bind,from=base,target=/s \
     cp -rfv /s/usr/libexec/docker /usr/libexec;\
     cp -rvf /s/usr/local/bin/* /usr/local/bin
 RUN --mount=type=bind,from=base,target=/s \
-    cp -rfv /s/usr/libexec/docker /usr/libexec;\
+    /tmp/add_buildx.sh;\
+    for i in /usr/local/libexec/docker /s/usr/libexec/docker;do if [ -e /s/$i ];then if [ ! -e $i ];then mkdir -pv $i;fi;cp -rfv /s/$i/. $i;fi;done;\
     cp -rvf /s/usr/local/bin/* /usr/local/bin
 RUN --mount=type=bind,from=compose,target=/s \
     set -ex;\
